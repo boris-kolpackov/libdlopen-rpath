@@ -1,0 +1,11 @@
+: 1
+name: libdlopen-rpath
+version: 0.1.0-a.0.z
+summary: Test for dlopen() and rpath interaction
+license: MIT ; MIT License.
+description-file: README.md
+url: https://example.org/libdlopen-rpath
+email: boris@codesynthesis.com
+depends: * build2 >= 0.11.0
+depends: * bpkg >= 0.11.0
+#depends: libhello ^1.0.0

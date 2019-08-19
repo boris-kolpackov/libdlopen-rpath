@@ -1,0 +1,5 @@
+import libs = libdlopen-rpath%lib{dlopen-rpath}
+
+exe{driver}: {hxx ixx txx cxx}{**} $libs testscript{**}
+
+cxx.libs += -ldl

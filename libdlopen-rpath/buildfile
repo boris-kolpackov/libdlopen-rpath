@@ -1,0 +1,41 @@
+int_libs = # Interface dependencies.
+imp_libs = # Implementation dependencies.
+#import imp_libs += libhello%lib{hello}
+
+lib{dlopen-rpath}: {hxx ixx txx cxx}{**} $imp_libs $int_libs
+
+# Build options.
+#
+cxx.poptions =+ "-I$out_root" "-I$src_root"
+
+obja{*}: cxx.poptions += -DLIBDLOPEN_RPATH_STATIC_BUILD
+objs{*}: cxx.poptions += -DLIBDLOPEN_RPATH_SHARED_BUILD
+
+# Export options.
+#
+lib{dlopen-rpath}:
+{
+  cxx.export.poptions = "-I$out_root" "-I$src_root"
+  cxx.export.libs = $int_libs
+}
+
+liba{dlopen-rpath}: cxx.export.poptions += -DLIBDLOPEN_RPATH_STATIC
+libs{dlopen-rpath}: cxx.export.poptions += -DLIBDLOPEN_RPATH_SHARED
+
+# For pre-releases use the complete version to make sure they cannot be used
+# in place of another pre-release or the final version. See the version module
+# for details on the version.* variable values.
+#
+if $version.pre_release
+  lib{dlopen-rpath}: bin.lib.version = @"-$version.project_id"
+else
+  lib{dlopen-rpath}: bin.lib.version = @"-$version.major.$version.minor"
+
+# Install into the libdlopen-rpath/ subdirectory of, say, /usr/include/
+# recreating subdirectories.
+#
+{hxx ixx txx}{*}:
+{
+  install         = include/libdlopen-rpath/
+  install.subdirs = true
+}

@@ -1,0 +1,6 @@
+$out_root/
+{
+  include libdlopen-rpath/
+}
+
+export $out_root/libdlopen-rpath/$import.target
