@@ -12,3 +12,8 @@ Linux:           works (as documented)
 FreeBSD 12.0:    works
 Mac OS 10.14.5:  works
 ```
+
+Note that on Linux this only works if the executable uses RPATH and not
+RUNPATH. See this article for background:
+
+https://blog.qt.io/blog/2011/10/28/rpath-and-runpath/
